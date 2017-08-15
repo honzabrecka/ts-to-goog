@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+function deleteTSConfig {
+  rm -f d/tsconfig.json
+}
+
+deleteTSConfig
+
+for file in "d"/*; do
+  file="${file/d\//}"
+  cp tsconfig.template.json d/tsconfig.json
+  echo "$file"
+  sed -i '' "s/---file---/$file/g" "d/tsconfig.json"
+  file="${file/.d.ts/.extern.js}"
+  node_modules/.bin/tsickle --typed --externs="externs/$file" -- --project d
+  deleteTSConfig
+done
