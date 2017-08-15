@@ -3,18 +3,17 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-function deleteTSConfig {
-  rm -f d/tsconfig.json
-}
+for dir in "d"/*; do
 
-deleteTSConfig
+#dir="d/acl"
+file="${dir/d\//}"
+echo $file
+cd $dir
+npm install
+cd ../..
+cp tsconfig.template.json "$dir/tsconfig.json"
+node_modules/.bin/tsickle --typed --externs="externs/$file.extern.js" -- --project "$dir" || echo ">>
+fuck $dir"
+rm -rf "$dir/node_modules"
 
-for file in "d"/*; do
-  file="${file/d\//}"
-  cp tsconfig.template.json d/tsconfig.json
-  echo "$file"
-  sed -i '' "s/---file---/$file/g" "d/tsconfig.json"
-  file="${file/.d.ts/.extern.js}"
-  node_modules/.bin/tsickle --typed --externs="externs/$file" -- --project d
-  deleteTSConfig
 done

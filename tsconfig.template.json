@@ -7,21 +7,19 @@
     "target": "es5",
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true
+    "noUnusedLocals": false,
+    "experimentalDecorators": false
   },
   "include": [
-    "---file---"
+    "index.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec*"
+    "node_modules"
   ]
 }
