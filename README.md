@@ -10,8 +10,5 @@ TypeScript community already maintains [great resource](https://github.com/Defin
 
 ## Usage
 
- 1. Clone this repository somewhere and enter this location.
- 1. `yarn install` to install [typescript](https://www.typescriptlang.org/) and [tsickle](https://github.com/angular/tsickle)
- 1. Copy `*.d.ts` files into the `d` directory.
- 1. Run `./ts-to-goog`.
- 1. Enjoy generated externs in `externs` directory.
+ 1. Download jar from https://honzabrecka.com/public/generator-0.1.0-SNAPSHOT-standalone.jar
+ 1. `java -jar generator-0.1.0-SNAPSHOT-standalone.jar <package-to-convert>`, eg: `java -jar generator-0.1.0-SNAPSHOT-standalone.jar @types/react`
