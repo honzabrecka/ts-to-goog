@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/acl": "^0.4.33"
+  }
+}

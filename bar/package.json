@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "serial-fetch": "^1.0.0"
+  }
+}
