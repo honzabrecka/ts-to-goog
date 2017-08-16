@@ -12,3 +12,7 @@ TypeScript community already maintains [great resource](https://github.com/Defin
 
  1. Download jar from https://honzabrecka.com/public/generator-0.1.0-SNAPSHOT-standalone.jar
  1. `java -jar generator-0.1.0-SNAPSHOT-standalone.jar <package-to-convert>`, eg: `java -jar generator-0.1.0-SNAPSHOT-standalone.jar @types/react`
+
+## DefinitelyTyped
+
+As a quick proof of concept I converted all definitions from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) - results can be found in `externs` directory.
