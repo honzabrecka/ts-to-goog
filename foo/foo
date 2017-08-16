@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-IFS=$'\n\t'
-
-../node_modules/.bin/tsickle --typed --externs="ext/acl.extern.js" -- --project "." || echo ">>
-fuck ."
