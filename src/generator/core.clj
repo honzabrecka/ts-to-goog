@@ -18,16 +18,20 @@
 (def not-nil? (complement nil?))
 
 (def cli-options
-  [["-d" "--working-dir WORKING DIR"
-    :default "."]])
+  [["-d" "--working-dir working dir"
+    :default "."]
+   [nil "--typescript-version typescript version"
+    :default ""]
+   [nil "--tsickle-version tsickle version"
+    :default ""]])
 
 (defn parse-cli
   [args]
   (let [{:keys [options arguments errors]} (cli/parse-opts args cli-options)]
     (if errors
       (either/left errors)
-      (either/right {:working-dir   (get options :working-dir)
-                     :package-input (first arguments)}))))
+      (either/right (merge options
+                           {:package-input (first arguments)})))))
 
 (defn validate-working-dir
   [{:keys [working-dir] :as config}]
@@ -71,8 +75,11 @@
     (either/right config)))
 
 (defn install-compiler
-  [{:keys [working-dir] :as config}]
-  (let [{:keys [error]} (sh "npm" "install" "tsickle" "typescript" :dir working-dir)]
+  [{:keys [working-dir typescript-version tsickle-version] :as config}]
+  (let [{:keys [error]} (sh "npm" "install"
+                            (str "typescript" (when (not= typescript-version "") "@") typescript-version)
+                            (str "tsickle" (when (not= tsickle-version "") "@") tsickle-version)
+                            :dir working-dir)]
     (if error
       (either/left error)
       (either/right config))))
