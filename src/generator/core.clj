@@ -57,12 +57,8 @@
       (either/left "Invalid package."))))
 
 (defn delete-recursively [fname]
-  (let [func (fn [func f]
-               (when (.isDirectory f)
-                 (doseq [f2 (.listFiles f)]
-                   (func func f2)))
-               (clojure.java.io/delete-file f :silently true))]
-    (func func (clojure.java.io/file fname))))
+  (doseq [f (file-seq fname), :when (.isFile f)] (.delete f))
+  (doseq [f (file-seq fname), :when (.isDirectory f)] (.delete f)))
 
 (defn clean
   [{:keys [working-dir] :as config}]
