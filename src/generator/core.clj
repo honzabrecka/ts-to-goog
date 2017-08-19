@@ -144,20 +144,21 @@
     (println message))
   (System/exit code))
 
+(def >>= cats/bind)
+
 (defn generate
   [args]
-  (m/matchm (cats/alet [c1 (parse-cli args)
-                        c2 (validate-working-dir c1)
-                        c3 (parse-input c2)
-                        c4 (clean c3)
-                        c5 (install-compiler c4)
-                        c6 (install-package c5)
-                        c7 (get-package-json c6)
-                        c8 (get-typings c7)
-                        c9 (create-tsconfig c8)
-                        c10 (generate-extern c9)
-                        c11 (clean c10)]
-                       c11)
+  (m/matchm (-> (parse-cli args)
+                (>>= validate-working-dir)
+                (>>= parse-input)
+                (>>= clean)
+                (>>= install-compiler)
+                (>>= install-package)
+                (>>= get-package-json)
+                (>>= get-typings)
+                (>>= create-tsconfig)
+                (>>= generate-extern)
+                (>>= clean))
             {:left error} (exit 1 error)
             {:right _}    (exit 0 nil)))
 
