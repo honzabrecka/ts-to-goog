@@ -57,8 +57,9 @@
       (either/left "Invalid package."))))
 
 (defn delete-recursively [fname]
-  (doseq [f (file-seq fname), :when (.isFile f)] (.delete f))
-  (doseq [f (file-seq fname), :when (.isDirectory f)] (.delete f)))
+  (let [file (io/file fname)]
+    (doseq [f (file-seq file), :when (.isFile f)] (.delete f))
+    (doseq [f (file-seq file), :when (.isDirectory f)] (.delete f))))
 
 (defn clean
   [{:keys [working-dir] :as config}]
