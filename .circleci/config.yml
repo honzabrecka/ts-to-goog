@@ -3,14 +3,12 @@ jobs:
   build:
     working_directory: ~/w
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: honzabrecka/cljnode:0.1.0
     environment:
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-      - run: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-      - run: sudo apt-get install -y nodejs
       - run: lein uberjar
       - run: java -jar target/uberjar/generator-0.1.0-SNAPSHOT-standalone.jar @types/react --typescript-version "2.4.2" --tsickle-version="0.23.5"
       - run: cat externs/react.extern.js
