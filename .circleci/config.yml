@@ -10,5 +10,5 @@ jobs:
     steps:
       - checkout
       - run: lein uberjar
-      - run: java -jar target/uberjar/generator-0.1.0-SNAPSHOT-standalone.jar @types/react --typescript-version "2.4.2" --tsickle-version="0.23.5"
+      - run: java -jar target/uberjar/generator-0.1.0-SNAPSHOT-standalone.jar @types/react
       - run: cat externs/react.extern.js
