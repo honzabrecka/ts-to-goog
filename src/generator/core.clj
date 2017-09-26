@@ -21,9 +21,9 @@
   [["-d" "--working-dir working dir"
     :default "."]
    [nil "--typescript-version typescript version"
-    :default "2.4.2"]
+    :default "2.5.2"]
    [nil "--tsickle-version tsickle version"
-    :default "0.23.5"]])
+    :default "0.24.1"]])
 
 (defn parse-cli
   [args]
